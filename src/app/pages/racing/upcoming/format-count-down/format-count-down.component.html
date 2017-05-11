@@ -1,0 +1,7 @@
+<!--显示开赛时间-->
+<span *ngIf="hour!==undefind">{{hour|date:'hh:mm'}}</span>
+<!--倒计时显示分钟-->
+<span *ngIf="second===undefind && minutes!==undefind">{{sign}}{{minutes|number:'1.0-0'}} min</span>
+<!--倒数计每一秒倒数-->
+<span [ngStyle]="{'color': 'rgb(255, 153, 0)'}" *ngIf="second!==undefind">{{sign}} {{minutes|number:'2.0-0'}}:{{second|number:'2.0-0'}}</span>
+<!--<span *ngIf="status!='OPEN'">{{status}}</span>-->

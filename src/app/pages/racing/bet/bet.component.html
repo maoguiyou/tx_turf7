@@ -1,0 +1,132 @@
+<!--导航栏-->
+<app-nav></app-nav>
+
+<!--赛马游戏-->
+<div class="racing-container clearfix" id="racing-body">
+  <!--左边布局-->
+  <div style=" background-color:#f2f2f2;padding:5px;" class="racing-sidebar-left">
+    <!--账户信息-->
+    <app-user-info></app-user-info>
+
+    <!--下单-->
+    <app-betslip (onPostBetslip)="updateBets($event)"></app-betslip>
+
+    <!--挂单-->
+    <app-pending-bets></app-pending-bets>
+
+    <!--成交单-->
+    <app-confirmed-bets></app-confirmed-bets>
+
+    <!-- upcoming-->
+    <app-upcoming></app-upcoming>
+
+  </div>
+
+  <!--右边布局-->
+  <div style="background-color:#fff;padding:5px;" class="racing-sidebar-right">
+    <!--游戏对应HTML-->
+    <div class="game container">
+      <div *ngIf="gameInfo" class="game-info row">
+        <h3 style="width: 100%;">
+          <img src="http://www.0000tx.net/Content/css/IMG/flag-AU.png">
+          {{gameInfo.Venue}}({{gameInfo.Country}}) - Race {{gameInfo.Race}}
+        </h3>
+        <h4>{{gameInfo.GameType}} {{gameInfo.MarketName}}  {{gameInfo.SuspendTimeUtc|date:'dd MMM  HH:mm (Z)'}}</h4>
+      </div>
+      <div *ngFor="let game of gameDetails" class="game-content" style="position: relative;"
+           [ngClass]="{'game-type-win': game.Game.Rules==1,'game-type-place':game.Game.Rules!=1}">
+        <div class="game-type row">
+          <div class="col-6 market">{{game.Game.Rules==1 ? 'Win Only Market' : (game.Game.Rules + ' To Be Placed')}}</div>
+          <div class="col-6 refresh"> <count-down *ngIf="game.Game.Rules==1" (onEnd)="updateOdds()" [displayString]="10"></count-down></div>
+        </div>
+
+        <div class="thead">
+          <div class="row">
+            <div style="width: 300px;padding-left: 15px;" class="cell">{{game.Runners.length}} selections</div>
+            <div class="col cell">
+              <span>BET</span><span>EAT</span>
+            </div>
+          </div>
+        </div>
+        <div class="tbody">
+          <div *ngFor="let Runner of game.Runners" class="row">
+            <!--赛马和赛狗第一列信息不一样-->
+            <div *ngIf="gameInfo.GameType!='dog'" style="width:300px;padding-left: 15px;" class="horse-runner-info runner-info cell">
+              <div style="line-height: 18px;font-size: 14px;">
+                <div>
+                  <span style="width: 50px;display: inline-block;" class="persent-number">{{Runner.Runner.Rf}}%</span>
+                  <span style="width: 40px;display: inline-block;" class="runner-number">{{Runner.Runner.SortPriority}}({{Runner.Runner.StallDraw}})</span>
+                </div>
+
+                <!--win 场-->
+                <div [ngStyle]="{color: calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).winRist>0 ? 'green' : 'red'}"
+                     *ngIf="game.Game.Rules==1" class="risk-tip"> {{calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).winRist|number:'1.0-0'}}</div>
+                <!--place 场-->
+                <div *ngIf="game.Game.Rules!=1" class="risk-tip">
+                <span [ngStyle]="{color: calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).placeRiskBet>0 ? 'green' : 'red'}"
+                      style="display: inline-block;width: 46px;">{{calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).placeRiskBet|number:'1.0-0'}}</span>
+                <span [ngStyle]="{color: calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).placeRiskEat>0 ? 'green' : 'red'}"
+                      style="display: inline-block;width: 46px;">{{calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).placeRiskEat|number:'1.0-0'}}</span>
+                </div>
+
+              </div>
+              <div class="runner-img">
+                <img class="" src="{{Runner.Runner.ColoursFileName}}" alt="">
+              </div>
+              <div class="runner-name">
+                <h6>{{Runner.Runner.RunnerName}}</h6>
+                <div>{{Runner.Runner.JockeyName}}</div>
+              </div>
+            </div>
+            <!--赛狗第一列-->
+            <div *ngIf="gameInfo.GameType=='dog'" style="width:300px;padding-left: 15px;" class="dog-runner-info runner-info cell">
+              <div class="runner-img">
+                <img class="" src="/assets/images/dog_flag/dog{{Runner.Runner.SortPriority}}.png" alt="">
+              </div>
+
+              <div class="runner-name">
+                <h6>{{Runner.Runner.RunnerName}}</h6>
+
+                <!--win 场-->
+                <div [ngStyle]="{color: calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).winRist>0 ? 'green' : 'red'}"
+                     *ngIf="game.Game.Rules==1" class="risk-tip"> {{calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).winRist|number:'1.0-0'}}</div>
+                <!--place 场-->
+                <div *ngIf="game.Game.Rules!=1" class="risk-tip">
+                <span [ngStyle]="{color: calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).placeRiskBet>0 ? 'green' : 'red'}"
+                      style="display: inline-block;width: 46px;">{{calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).placeRiskBet|number:'1.0-0'}}</span>
+                <span [ngStyle]="{color: calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).placeRiskEat>0 ? 'green' : 'red'}"
+                      style="display: inline-block;width: 46px;">{{calculateRisk(game.Game.GameId,Runner.Runner.RunnerId,game.Game.Rules).placeRiskEat|number:'1.0-0'}}</span>
+                </div>
+
+              </div>
+            </div>
+
+            <div style="padding:5px 0;"
+                 *ngFor="let oddCell of Runner.Odds.Odds;let i = index;"
+                 [ngClass]="{'flashYellow': oddCell.isChange,
+               'oddShadow': betslipService.oddShadow(game.Game.GameId, Runner.Runner.RunnerId, oddCell.TicketType, i)}"
+                 (click)="betslipService.clickOdd(game.Game.GameId, game.Game.Rules, Runner.Runner.RunnerId, Runner.Runner.RunnerName, i, oddCell)"
+                 class="cell col">
+              <h6 style="font-size: 12px;line-height: 16px;color:black;font-weight: bold;">{{oddCell.Odds>0 ? (oddCell.Odds |number:'1.0-2') : '-'}}</h6>
+              <div style="font-size: 12px;line-height:16px;"> {{oddCell.Num>0 ? (oddCell.Num | currency:'USD':true:'1.0-0') : '--'}}  </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!--状态层遮罩-->
+        <div [hidden]="game.Game.Status=='OPEN'" style="position: absolute;top:0;left:-15px;background-color:rgba(0,0,0,0.5);height:100%;width:750px;">
+          <div style="color:white;height:50px;line-height: 50px;position: relative;top:50%;text-align: center;font-size: 40px;transform: translateY(-50%);">{{game.Game.Status}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <style>
+    .flashYellow{
+      background-color: #FFF68F!important;
+    }
+  </style>
+
+</div>

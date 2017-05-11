@@ -1,0 +1,18 @@
+#user-info{
+  .list-group-item{
+    padding: .3rem .5rem;
+    font-size: 14px;
+    &:nth-child(odd){
+      background-color: #d1d9dd;
+    }
+    &:nth-child(even){
+      background-color: #E2EAEE;
+    }
+    &:first-child{
+      background-color: #ffd154;
+      color:white;
+      font-weight: bold;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+  }
+}

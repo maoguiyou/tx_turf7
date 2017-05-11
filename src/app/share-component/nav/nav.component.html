@@ -1,0 +1,79 @@
+<div id="nav">
+  <div class="racing-head racing-container clearfix">
+    <div class="logo racing-sidebar-left">
+      <img src="/assets/images/logo_new_zh.png">
+    </div>
+    <div class="container racing-sidebar-right">
+      <div class="row">
+        <div style="overflow: hidden; padding:0;" class="col-5 news-by">
+          <ul style="margin:0;padding:0; height: 30px;display: inline-block;line-height: 30px;white-space: nowrap;">
+            <li style="display: inline;">1. Doomben (AUS) 賽馬 第6场至第8场  已被官方場所取消. 所有成交交易將會被廢除並退還. 請查詢對賬單確認交易廢除/退還信息.</li>
+            <li style="display: inline;">2. Doomben (AUS) 賽馬 第6场至第8场  已被官方場所取消. 所有成交交易將會被廢除並退還. 請查詢對賬單確認交易廢除/退還信息.</li>
+          </ul>
+        </div>
+
+        <div class="col-7 text-right nav-btn-group">
+          <button routerLink="/game-help" id="racing-help" type="button" class="btn btn-sm">
+            <img src="/app/share-component/nav/images/A10_help_white.png">
+            Help
+          </button>
+
+          <div class="btn-group">
+            <button id="racing-acc" type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="/app/share-component/nav/images/A10_acc.png">
+              My Acc
+            </button>
+            <div class="dropdown-menu">
+              <a routerLink="/my-acc" class="dropdown-item" href="#">My Acc</a>
+              <a routerLink="/current-bet" class="dropdown-item" href="#">Current Bet</a>
+              <a routerLink="/winLose-report" class="dropdown-item" href="#">Win/Lose Report</a>
+              <a routerLink="/racing-results" class="dropdown-item" href="#">Racing Results</a>
+              <a routerLink="/draw-history" class="dropdown-item" href="#">Draw History</a>
+              <a routerLink="/change-password" class="dropdown-item" href="#">Change Password</a>
+              <a routerLink="/exchange-rate" class="dropdown-item" href="#">Exchange Rate</a>
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn  btn-sm dropdown-toggle" type="button" id="racing-langues" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              English
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">English</a>
+              <a class="dropdown-item" href="#">简体中文</a>
+              <a class="dropdown-item" href="#">繁体中文</a>
+            </div>
+          </div>
+
+          <button routerLink="/login" id="racing-logout" type="button" class="btn btn-sm">
+            <img src="/app/share-component/nav/images/A10_logout_white.png">
+            Logout
+          </button>
+        </div>
+      </div>
+      <div class="row padding-top-5">
+        <ul class="nav col-6">
+          <li class="nav-item">
+            <a routerLink="/racing" class="nav-link" routerLinkActive="active">Racing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/four" routerLinkActive="active">4D</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/six" routerLinkActive="active">6D</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/poker" routerLinkActive="active">Poker</a>
+          </li>
+        </ul>
+        <div class="col-6 text-right">
+          <!--<img src="http://www.0000tx.net/V20170220/Content/css/IMG/A10_time.png" alt="">-->
+          {{serveTime|date:'yyyy-MM-dd HH:mm:ss (Z)'}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

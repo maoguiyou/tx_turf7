@@ -1,0 +1,95 @@
+.container{
+  .game-content{
+    margin-bottom: 5px;
+  }
+
+  .game-type{
+    background-color: #4b5964;
+    color:white;
+    padding:5px 0;
+    .market{
+      line-height:30px;
+    }
+    .refresh{
+      text-align: right;
+    }
+  }
+
+  .thead .row,.tbody .row{
+    border: 1px solid rgba(0,0,0,.15);
+    border-top:none;
+  }
+  .thead{
+    .row{
+      padding-top:10px;
+    }
+    .col{
+      text-align: center;
+      span{
+        display:inline-block;
+        padding:0 16px;
+        border-top:1px solid rgba(0,0,0,.15);
+        border-left:1px solid rgba(0,0,0,.15);
+        &:first-child{
+          background-color: #CFE2F3;
+        }
+        &:last-child{
+          border-right:1px solid rgba(0,0,0,.15);
+          background-color:#F4CCCC;
+        }
+      }
+    }
+  }
+
+  .tbody{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    .cell{
+      text-align: center;
+      overflow: hidden;
+      &:nth-child(n+2){
+        border-left: 1px solid rgba(0,0,0,.15);
+      }
+      &:first-child{
+        background-color: #f2f2f2;
+      }
+      &:nth-child(4){
+        background-color: #a2c9e1;
+      }
+      &:nth-child(5){
+        background-color: #e4aaab;
+      }
+      h6{
+        margin-bottom:0;
+        &:empty::after{
+          content: '-';
+          //background-color:red;
+        }
+      }
+      &>div:empty::after{
+        content: '--';
+        //background-color: red;
+      }
+    }
+    .runner-info{
+      line-height: 40px;
+      text-align: left;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      &>div{
+        display: inline-block;
+        vertical-align: middle;
+        min-width:40px ;
+      }
+      .runner-name{
+        h6,div{
+          font-size: 0.75rem;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+}

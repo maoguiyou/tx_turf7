@@ -1,0 +1,120 @@
+#nav{
+  padding-top:5px;
+  background: -webkit-linear-gradient(#283a48, #273846, #1e2c38); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#283a48, #273846, #1e2c38); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#283a48, #273846, #1e2c38); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#283a48, #273846, #1e2c38); /* 标准的语法 */
+}
+.racing-head{
+  color:white;
+  .padding-top-5{
+    padding-top: 5px;
+  }
+  .logo{
+    img{
+      width:6rem;
+    }
+  }
+
+  //轮播消息
+  .news-by{
+    background-color: rgb(15, 24, 31);
+    border-radius: 4px;
+  }
+  @mixin newsAnimateMixin{
+    from {
+      transform:translateX(0);
+      -ms-transform:translateX(0); 	/* IE 9 */
+      -moz-transform:translateX(0); 	/* Firefox */
+      -webkit-transform:translateX(0); /* Safari 和 Chrome */
+      -o-transform:translateX(0); 	/* Opera */
+    }
+    to {
+      transform:translateX(-100%);
+      -ms-transform:translateX(-100%); 	/* IE 9 */
+      -moz-transform:translateX(-100%); 	/* Firefox */
+      -webkit-transform:translateX(-100%); /* Safari 和 Chrome */
+      -o-transform:translateX(-100%); 	/* Opera */
+    }
+  }
+  //css3 轮播新闻动画
+  @keyframes newsAnimate
+  {
+    @include newsAnimateMixin;
+  }
+
+  @-moz-keyframes newsAnimate /* Firefox */
+  {
+    @include newsAnimateMixin;
+  }
+
+  @-webkit-keyframes newsAnimate /* Safari 和 Chrome */
+  {
+    @include newsAnimateMixin;
+  }
+
+  @-o-keyframes newsAnimate /* Opera */
+  {
+    @include newsAnimateMixin;
+  }
+  .news-by ul{
+    position: absolute;
+    left:100%;
+    animation: newsAnimate infinite linear 40s;
+    -moz-animation: newsAnimate infinite linear 40s;	/* Firefox */
+    -webkit-animation: newsAnimate infinite linear 40s;	/* Safari 和 Chrome */
+    -o-animation: newsAnimate infinite linear 40s;	/* Opera */
+    &:hover{
+      -webkit-animation-play-state:paused;
+      -moz-animation-play-state:paused;
+      -o-animation-play-state:paused;
+      animation-play-state:paused;
+    }
+  }
+
+  .nav-btn-group{
+    color:white;
+    border:none;
+    #racing-acc,
+    #racing-help {
+      color:white;
+      background: -webkit-linear-gradient(#a5b5bf, #778e9b,#778e9b, #a5b5bf); /* Safari 5.1 - 6.0 */
+      background: -o-linear-gradient(#a5b5bf, #778e9b,#778e9b, #a5b5bf); /* Opera 11.1 - 12.0 */
+      background: -moz-linear-gradient(#a5b5bf, #778e9b,#778e9b, #a5b5bf); /* Firefox 3.6 - 15 */
+      background: linear-gradient(#a5b5bf, #778e9b,#778e9b, #a5b5bf); /* 标准的语法 */
+    }
+    #racing-langues{
+      background-color: #f3f3f3;
+      height: 28px;
+    }
+    #racing-logout{
+      color:white;
+      background-color: #4cb1cf;
+    }
+  }
+
+
+  //导航栏样式
+  .nav{
+    .nav-item{
+      background-color: #6b7c8a;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      overflow: hidden;
+      margin-right: 5px;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+    .active{
+      background-color: #a1b5c3;
+    }
+    .nav-link{
+      padding:0 1rem;
+      color:white;
+      min-width: 80px;
+      text-align: center;
+    }
+  }
+
+}

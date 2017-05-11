@@ -1,0 +1,22 @@
+<!-- upcoming-->
+<div style="" class="upcoming">
+  <div class="container" style="padding-top:10px;">
+    <div style="margin-bottom: 5px;background-color:transparent;" class="row tabs-title">
+      <div style="cursor:pointer;background-color:#47525C;text-align: center;color:white;border-right: 60px solid #f2f2f2;" class="col-6"> Upcoming</div>
+      <div style="cursor:pointer;background-color:rgb(107, 124, 138);text-align: center;border-left: 15px solid #f2f2f2;color:white;" class="col-3">card</div>
+      <div style="cursor:pointer;background-color:#F1C232;text-align: center;color:black;border-left: 15px solid #f2f2f2;" class="col-3">citibet</div>
+    </div>
+    <a  *ngFor="let item of upcomingList" href="/racing/bet/{{item.GameIds}}"
+          style="margin-bottom:2px;border:1px solid rgb(176, 169, 169); background-color:#fff;color:#1b3b4d;text-decoration: none;"
+         class="upcoming-list-item row">
+      <div style="width:200px;" class="tx-ellipsis">
+        <img src="/assets/images/A74_{{item.GameType}}.png" alt="{{item.GameType}}">
+        R{{item.Race}} {{item.Venue}} {{item.Country}}
+      </div>
+
+      <div class="col text-right"><app-format-count-down [status]="item.Status" [endTime]="item.SuspendTimeUtc"></app-format-count-down></div>
+
+    </a>
+  </div>
+</div>
+
